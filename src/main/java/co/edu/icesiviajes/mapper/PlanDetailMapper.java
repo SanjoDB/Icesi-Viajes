@@ -10,19 +10,15 @@ import java.util.List;
 @Mapper
 public interface PlanDetailMapper {
 
-    @Mapping(source = "plan.id_plan", target = "plan")
     @Mapping(source = "destination.id_destination", target = "destination")
     PlanDetailDTO toPlanDetailDTO(PlanDetail entity);
 
-    @Mapping(source = "plan", target = "plan.id_plan")
     @Mapping(source = "destination", target = "destination.id_destination")
     PlanDetail toPlanDetail(PlanDetailDTO entity);
 
-    @Mapping(source = "plan.id_plan", target = "plan")
     @Mapping(source = "destination.id_destination", target = "destination")
     List<PlanDetailDTO> toPlanDetailDTO(List<PlanDetail> entity);
 
-    @Mapping(source = "plan", target = "plan.id_plan")
     @Mapping(source = "destination", target = "destination.id_destination")
     List<PlanDetail> toPlanDetail(List<PlanDetailDTO> entity);
 

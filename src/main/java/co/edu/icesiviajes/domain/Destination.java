@@ -22,7 +22,5 @@ public class Destination {
     private String description;
     @Column(name = "state", nullable = false)
     private String state;
-    @Column(name = "destinationType", nullable = false)
-    private DestinationType destinationType;
 
 }

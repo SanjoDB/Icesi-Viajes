@@ -1,7 +1,5 @@
 package co.edu.icesiviajes.dto;
 
-import co.edu.icesiviajes.domain.Client;
-import co.edu.icesiviajes.domain.User;
 import lombok.Data;
 
 import java.util.Date;

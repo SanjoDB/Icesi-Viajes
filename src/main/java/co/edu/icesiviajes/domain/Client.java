@@ -1,9 +1,6 @@
 package co.edu.icesiviajes.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -30,5 +27,9 @@ public class Client {
     private String Gender;
     @Column(name = "birthdate", nullable = false)
     private Date birthdate;
+
+    @ManyToOne
+    @JoinColumn(name = "id_idty")
+    private IdentificationType identificationType;
 
 }

@@ -20,7 +20,5 @@ public class IdentificationType {
     private String name;
     @Column(name = "state", nullable = false)
     private String state;
-    //@Column(name = "id_client", nullable = false)
-    //private Client id_client;
 
 }

@@ -15,5 +15,6 @@ public class ClientDTO {
     private String mail;
     private String Gender;
     private Date birthdate;
+    private Integer identificationType;
 
 }

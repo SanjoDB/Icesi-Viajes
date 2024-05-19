@@ -18,7 +18,6 @@ public class PlanDetailDTO {
     private Integer num_nights;
     private Integer num_days;
     private String state;
-    private Long plan;
     private Long destination;
 
 }

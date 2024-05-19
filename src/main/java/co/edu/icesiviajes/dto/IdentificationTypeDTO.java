@@ -3,12 +3,11 @@ package co.edu.icesiviajes.dto;
 import lombok.Data;
 
 @Data
-public class DestinationDTO {
+public class IdentificationTypeDTO {
 
-    private Integer id_destination;
+    private Integer id_idty;
     private String code;
     private String name;
-    private String description;
     private String state;
 
 }

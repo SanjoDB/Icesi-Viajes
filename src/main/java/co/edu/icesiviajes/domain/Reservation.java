@@ -1,9 +1,6 @@
 package co.edu.icesiviajes.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -18,9 +15,13 @@ public class Reservation {
     private Integer id_reservation;
     @Column(name = "reserved", nullable = false)
     private Date reserved;
-    @Column(name = "client", nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "id_client")
     private Client client;
-    @Column(name = "plan", nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "id_plan")
     private Plan plan;
 
 }

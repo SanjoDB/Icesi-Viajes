@@ -1,9 +1,6 @@
 package co.edu.icesiviajes.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -32,9 +29,9 @@ public class PlanDetail {
     private Integer num_days;
     @Column(name = "state", nullable = false)
     private String state;
-    @Column(name = "plan", nullable = false)
-    private Plan plan;
-    @Column(name = "destination", nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "id_destination")
     private Destination destination;
 
 }
