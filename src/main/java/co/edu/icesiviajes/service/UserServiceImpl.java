@@ -15,23 +15,23 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
     @Autowired
-    private UserMapper userMapper;
+    private UserMapper mapper;
 
     @Override
     public List<UserDTO> findAll() {
 
-        List<UserDTO> lstCliente = userMapper.toUserDTO(userRepository.findAll());
+        List<UserDTO> lst = mapper.toUserDTO(repository.findAll());
 
-        return lstCliente;
+        return lst;
     }
 
     @Override
     public UserDTO findById(Integer id) throws Exception {
         try{
-            User user = userRepository.findById(id).get();
-            return userMapper.toUserDTO(user);
+            User user = repository.findById(id).get();
+            return mapper.toUserDTO(user);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
         }
@@ -40,10 +40,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDTO save(UserDTO entity) throws Exception {
 
-        User user = userMapper.toUser(entity);
-
-        if(userRepository.findById(user.getId_user()).isEmpty()){
-            return userMapper.toUserDTO(userRepository.save(user));
+        if(repository.findById(entity.getId_user()).isEmpty()){
+            User user = mapper.toUser(entity);
+            return mapper.toUserDTO(repository.save(user));
         }else{
             throw new Exception("La entidad ya existe");
         }
@@ -52,10 +51,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDTO update(UserDTO entity) throws Exception {
 
-        User user = userMapper.toUser(entity);
-
-        if(userRepository.findById(user.getId_user()).isPresent()){
-            return userMapper.toUserDTO(userRepository.save(user));
+        if(repository.findById(entity.getId_user()).isPresent()){
+            User user = mapper.toUser(entity);
+            return mapper.toUserDTO(repository.save(user));
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -64,10 +62,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public void delete(UserDTO entity) throws Exception {
 
-        User user = userMapper.toUser(entity);
-
-        if(userRepository.findById(user.getId_user()).isPresent()){
-            userRepository.delete(user);
+        if(repository.findById(entity.getId_user()).isPresent()){
+            User user = mapper.toUser(entity);
+            repository.delete(user);
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -75,10 +72,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteById(Integer id) throws Exception {
-        try{
-            User user = userRepository.findById(id).get();
-            userRepository.deleteById(user.getId_user());
-        }catch (Exception e){
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+        }else{
             throw new Exception("La entidad no existe");
         }
     }
@@ -93,7 +89,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public Long count() {
 
-        return userRepository.count();
+        return repository.count();
 
     }
 

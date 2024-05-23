@@ -16,23 +16,23 @@ import java.util.List;
 public class ReservationServiceImpl implements ReservationService{
 
     @Autowired
-    private ReservationRepository reservationRepository;
+    private ReservationRepository repository;
     @Autowired
-    private ReservationMapper reservationMapper;
+    private ReservationMapper mapper;
 
     @Override
     public List<ReservationDTO> findAll() {
 
-        List<ReservationDTO> lstCliente = reservationMapper.toReservationDTO(reservationRepository.findAll());
+        List<ReservationDTO> lst = mapper.toReservationDTO(repository.findAll());
 
-        return lstCliente;
+        return lst;
     }
 
     @Override
     public ReservationDTO findById(Integer id) throws Exception {
         try{
-            Reservation reservation = reservationRepository.findById(id).get();
-            return reservationMapper.toReservationDTO(reservation);
+            Reservation reservation = repository.findById(id).get();
+            return mapper.toReservationDTO(reservation);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
         }
@@ -41,10 +41,9 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public ReservationDTO save(ReservationDTO entity) throws Exception {
 
-        Reservation reservation = reservationMapper.toReservation(entity);
-
-        if(reservationRepository.findById(reservation.getId_reservation()).isEmpty()){
-            return reservationMapper.toReservationDTO(reservationRepository.save(reservation));
+        if(repository.findById(entity.getId_reservation()).isEmpty()){
+            Reservation reservation = mapper.toReservation(entity);
+            return mapper.toReservationDTO(repository.save(reservation));
         }else{
             throw new Exception("La entidad ya existe");
         }
@@ -53,10 +52,9 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public ReservationDTO update(ReservationDTO entity) throws Exception {
 
-        Reservation reservation = reservationMapper.toReservation(entity);
-
-        if(reservationRepository.findById(reservation.getId_reservation()).isPresent()){
-            return reservationMapper.toReservationDTO(reservationRepository.save(reservation));
+        if(repository.findById(entity.getId_reservation()).isPresent()){
+            Reservation reservation = mapper.toReservation(entity);
+            return mapper.toReservationDTO(repository.save(reservation));
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -65,10 +63,9 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public void delete(ReservationDTO entity) throws Exception {
 
-        Reservation reservation = reservationMapper.toReservation(entity);
-
-        if(reservationRepository.findById(reservation.getId_reservation()).isPresent()){
-            reservationRepository.delete(reservation);
+        if(repository.findById(entity.getId_reservation()).isPresent()){
+            Reservation reservation = mapper.toReservation(entity);
+            repository.delete(reservation);
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -76,10 +73,9 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     public void deleteById(Integer id) throws Exception {
-        try{
-            Reservation reservation = reservationRepository.findById(id).get();
-            reservationRepository.deleteById(reservation.getId_reservation());
-        }catch (Exception e){
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+        }else{
             throw new Exception("La entidad no existe");
         }
     }
@@ -94,7 +90,7 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public Long count() {
 
-        return reservationRepository.count();
+        return repository.count();
 
     }
 

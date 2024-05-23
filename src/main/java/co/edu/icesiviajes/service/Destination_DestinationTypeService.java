@@ -1,9 +1,8 @@
 package co.edu.icesiviajes.service;
 
-import co.edu.icesiviajes.domain.Destination_DestinationType;
-import org.springframework.data.jpa.repository.JpaRepository;
+import co.edu.icesiviajes.dto.Destination_DestinationTypeDTO;
 
-public interface Destination_DestinationTypeService extends JpaRepository<Destination_DestinationType, Integer> {
+public interface Destination_DestinationTypeService extends GenericService<Destination_DestinationTypeDTO, Integer> {
 
 
 

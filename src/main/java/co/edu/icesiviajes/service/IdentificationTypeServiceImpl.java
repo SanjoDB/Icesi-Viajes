@@ -15,23 +15,23 @@ import java.util.List;
 public class IdentificationTypeServiceImpl implements IdentificationTypeService{
 
     @Autowired
-    private IdentificationTypeRepository identificationTypeRepository;
+    private IdentificationTypeRepository repository;
     @Autowired
-    private IdentificationTypeMapper identificationTypeMapper;
+    private IdentificationTypeMapper mapper;
 
     @Override
     public List<IdentificationTypeDTO> findAll() {
 
-        List<IdentificationTypeDTO> lstIdentificationType = identificationTypeMapper.toIdentificationTypeDTO(identificationTypeRepository.findAll());
+        List<IdentificationTypeDTO> lst = mapper.toIdentificationTypeDTO(repository.findAll());
 
-        return lstIdentificationType;
+        return lst;
     }
 
     @Override
     public IdentificationTypeDTO findById(Integer id) throws Exception {
         try{
-            IdentificationType identificationType = identificationTypeRepository.findById(id).get();
-            return identificationTypeMapper.toIdentificationTypeDTO(identificationType);
+            IdentificationType identificationType = repository.findById(id).get();
+            return mapper.toIdentificationTypeDTO(identificationType);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
         }
@@ -40,10 +40,9 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService{
     @Override
     public IdentificationTypeDTO save(IdentificationTypeDTO entity) throws Exception {
 
-        IdentificationType identificationType = identificationTypeMapper.toIdentificationType(entity);
-
-        if(identificationTypeRepository.findById(identificationType.getId_idty()).isEmpty()){
-            return identificationTypeMapper.toIdentificationTypeDTO(identificationTypeRepository.save(identificationType));
+        if(repository.findById(entity.getId_idty()).isEmpty()){
+            IdentificationType identificationType = mapper.toIdentificationType(entity);
+            return mapper.toIdentificationTypeDTO(repository.save(identificationType));
         }else{
             throw new Exception("La entidad ya existe");
         }
@@ -52,10 +51,9 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService{
     @Override
     public IdentificationTypeDTO update(IdentificationTypeDTO entity) throws Exception {
 
-        IdentificationType identificationType = identificationTypeMapper.toIdentificationType(entity);
-
-        if(identificationTypeRepository.findById(identificationType.getId_idty()).isPresent()){
-            return identificationTypeMapper.toIdentificationTypeDTO(identificationTypeRepository.save(identificationType));
+        if(repository.findById(entity.getId_idty()).isPresent()){
+            IdentificationType identificationType = mapper.toIdentificationType(entity);
+            return mapper.toIdentificationTypeDTO(repository.save(identificationType));
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -64,10 +62,9 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService{
     @Override
     public void delete(IdentificationTypeDTO entity) throws Exception {
 
-        IdentificationType identificationType = identificationTypeMapper.toIdentificationType(entity);
-
-        if(identificationTypeRepository.findById(identificationType.getId_idty()).isPresent()){
-            identificationTypeRepository.delete(identificationType);
+        if(repository.findById(entity.getId_idty()).isPresent()){
+            IdentificationType identificationType = mapper.toIdentificationType(entity);
+            repository.delete(identificationType);
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -75,10 +72,9 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService{
 
     @Override
     public void deleteById(Integer id) throws Exception {
-        try{
-            IdentificationType identificationType = identificationTypeRepository.findById(id).get();
-            identificationTypeRepository.deleteById(identificationType.getId_idty());
-        }catch (Exception e){
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+        }else{
             throw new Exception("La entidad no existe");
         }
     }
@@ -93,7 +89,7 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService{
     @Override
     public Long count() {
 
-        return identificationTypeRepository.count();
+        return repository.count();
 
     }
 

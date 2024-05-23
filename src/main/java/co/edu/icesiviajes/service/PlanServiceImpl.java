@@ -15,23 +15,23 @@ import java.util.List;
 public class PlanServiceImpl implements PlanService{
 
     @Autowired
-    private PlanRepository planRepository;
+    private PlanRepository repository;
     @Autowired
-    private PlanMapper planMapper;
+    private PlanMapper mapper;
 
     @Override
     public List<PlanDTO> findAll() {
 
-        List<PlanDTO> lstCliente = planMapper.toPlanDTO(planRepository.findAll());
+        List<PlanDTO> lst = mapper.toPlanDTO(repository.findAll());
 
-        return lstCliente;
+        return lst;
     }
 
     @Override
     public PlanDTO findById(Integer id) throws Exception {
         try{
-            Plan plan = planRepository.findById(id).get();
-            return planMapper.toPlanDTO(plan);
+            Plan plan = repository.findById(id).get();
+            return mapper.toPlanDTO(plan);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
         }
@@ -40,10 +40,9 @@ public class PlanServiceImpl implements PlanService{
     @Override
     public PlanDTO save(PlanDTO entity) throws Exception {
 
-        Plan plan = planMapper.toPlan(entity);
-
-        if(planRepository.findById(plan.getId_plan()).isEmpty()){
-            return planMapper.toPlanDTO(planRepository.save(plan));
+        if(repository.findById(entity.getId_plan()).isEmpty()){
+            Plan plan = mapper.toPlan(entity);
+            return mapper.toPlanDTO(repository.save(plan));
         }else{
             throw new Exception("La entidad ya existe");
         }
@@ -52,10 +51,9 @@ public class PlanServiceImpl implements PlanService{
     @Override
     public PlanDTO update(PlanDTO entity) throws Exception {
 
-        Plan plan = planMapper.toPlan(entity);
-
-        if(planRepository.findById(plan.getId_plan()).isPresent()){
-            return planMapper.toPlanDTO(planRepository.save(plan));
+        if(repository.findById(entity.getId_plan()).isPresent()){
+            Plan plan = mapper.toPlan(entity);
+            return mapper.toPlanDTO(repository.save(plan));
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -64,10 +62,9 @@ public class PlanServiceImpl implements PlanService{
     @Override
     public void delete(PlanDTO entity) throws Exception {
 
-        Plan plan = planMapper.toPlan(entity);
-
-        if(planRepository.findById(plan.getId_plan()).isPresent()){
-            planRepository.delete(plan);
+        if(repository.findById(entity.getId_plan()).isPresent()){
+            Plan plan = mapper.toPlan(entity);
+            repository.delete(plan);
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -75,10 +72,9 @@ public class PlanServiceImpl implements PlanService{
 
     @Override
     public void deleteById(Integer id) throws Exception {
-        try{
-            Plan plan = planRepository.findById(id).get();
-            planRepository.deleteById(plan.getId_plan());
-        }catch (Exception e){
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+        }else{
             throw new Exception("La entidad no existe");
         }
     }
@@ -93,8 +89,20 @@ public class PlanServiceImpl implements PlanService{
     @Override
     public Long count() {
 
-        return planRepository.count();
+        return repository.count();
 
+    }
+
+    public List<PlanDTO> listAll(String word){
+
+        List<PlanDTO> lst = mapper.toPlanDTO(repository.listAll(word));
+        List<PlanDTO> lst2 = mapper.toPlanDTO(repository.findAll());
+
+        if (word != null){
+            return lst;
+        }
+
+        return lst2;
     }
 
 }

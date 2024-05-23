@@ -15,23 +15,23 @@ import java.util.List;
 public class DestinationTypeServiceImpl implements DestinationTypeService{
 
     @Autowired
-    private DestinationTypeRepository destinationTypeRepository;
+    private DestinationTypeRepository repository;
     @Autowired
-    private DestinationTypeMapper destinationTypeMapper;
+    private DestinationTypeMapper mapper;
 
     @Override
     public List<DestinationTypeDTO> findAll() {
 
-        List<DestinationTypeDTO> lstCliente = destinationTypeMapper.toDestinationTypeDTO(destinationTypeRepository.findAll());
+        List<DestinationTypeDTO> lst = mapper.toDestinationTypeDTO(repository.findAll());
 
-        return lstCliente;
+        return lst;
     }
 
     @Override
     public DestinationTypeDTO findById(Integer id) throws Exception {
         try{
-            DestinationType destinationType = destinationTypeRepository.findById(id).get();
-            return destinationTypeMapper.toDestinationTypeDTO(destinationType);
+            DestinationType destinationType = repository.findById(id).get();
+            return mapper.toDestinationTypeDTO(destinationType);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
         }
@@ -40,10 +40,9 @@ public class DestinationTypeServiceImpl implements DestinationTypeService{
     @Override
     public DestinationTypeDTO save(DestinationTypeDTO entity) throws Exception {
 
-        DestinationType destinationType = destinationTypeMapper.toDestinationType(entity);
-
-        if(destinationTypeRepository.findById(destinationType.getIdDesType()).isEmpty()){
-            return destinationTypeMapper.toDestinationTypeDTO(destinationTypeRepository.save(destinationType));
+        if(repository.findById(entity.getIdDesType()).isEmpty()){
+            DestinationType destinationType = mapper.toDestinationType(entity);
+            return mapper.toDestinationTypeDTO(repository.save(destinationType));
         }else{
             throw new Exception("La entidad ya existe");
         }
@@ -52,10 +51,9 @@ public class DestinationTypeServiceImpl implements DestinationTypeService{
     @Override
     public DestinationTypeDTO update(DestinationTypeDTO entity) throws Exception {
 
-        DestinationType destinationType = destinationTypeMapper.toDestinationType(entity);
-
-        if(destinationTypeRepository.findById(destinationType.getIdDesType()).isPresent()){
-            return destinationTypeMapper.toDestinationTypeDTO(destinationTypeRepository.save(destinationType));
+        if(repository.findById(entity.getIdDesType()).isPresent()){
+            DestinationType destinationType = mapper.toDestinationType(entity);
+            return mapper.toDestinationTypeDTO(repository.save(destinationType));
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -64,10 +62,9 @@ public class DestinationTypeServiceImpl implements DestinationTypeService{
     @Override
     public void delete(DestinationTypeDTO entity) throws Exception {
 
-        DestinationType destinationType = destinationTypeMapper.toDestinationType(entity);
-
-        if(destinationTypeRepository.findById(destinationType.getIdDesType()).isPresent()){
-            destinationTypeRepository.delete(destinationType);
+        if(repository.findById(entity.getIdDesType()).isPresent()){
+            DestinationType destinationType = mapper.toDestinationType(entity);
+            repository.delete(destinationType);
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -75,10 +72,9 @@ public class DestinationTypeServiceImpl implements DestinationTypeService{
 
     @Override
     public void deleteById(Integer id) throws Exception {
-        try{
-            DestinationType destinationType = destinationTypeRepository.findById(id).get();
-            destinationTypeRepository.deleteById(destinationType.getIdDesType());
-        }catch (Exception e){
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+        }else{
             throw new Exception("La entidad no existe");
         }
     }
@@ -93,7 +89,7 @@ public class DestinationTypeServiceImpl implements DestinationTypeService{
     @Override
     public Long count() {
 
-        return destinationTypeRepository.count();
+        return repository.count();
 
     }
 

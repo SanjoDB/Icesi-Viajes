@@ -15,23 +15,23 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientRepository repository;
     @Autowired
-    private ClientMapper clientMapper;
+    private ClientMapper mapper;
 
     @Override
     public List<ClientDTO> findAll() {
 
-        List<ClientDTO> lstCliente = clientMapper.toClientDTO(clientRepository.findAll());
+        List<ClientDTO> lst = mapper.toClientDTO(repository.findAll());
 
-        return lstCliente;
+        return lst;
     }
 
     @Override
     public ClientDTO findById(Integer id) throws Exception {
         try{
-            Client client = clientRepository.findById(id).get();
-            return clientMapper.toClientDTO(client);
+            Client client = repository.findById(id).get();
+            return mapper.toClientDTO(client);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
         }
@@ -40,10 +40,9 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDTO save(ClientDTO entity) throws Exception {
 
-        Client client = clientMapper.toClient(entity);
-
-        if(clientRepository.findById(client.getId_client()).isEmpty()){
-            return clientMapper.toClientDTO(clientRepository.save(client));
+        if(repository.findById(entity.getId_client()).isEmpty()){
+            Client client = mapper.toClient(entity);
+            return mapper.toClientDTO(repository.save(client));
         }else{
             throw new Exception("La entidad ya existe");
         }
@@ -52,10 +51,9 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDTO update(ClientDTO entity) throws Exception {
 
-        Client client = clientMapper.toClient(entity);
-
-        if(clientRepository.findById(client.getId_client()).isPresent()){
-            return clientMapper.toClientDTO(clientRepository.save(client));
+        if(repository.findById(entity.getId_client()).isPresent()){
+            Client client = mapper.toClient(entity);
+            return mapper.toClientDTO(repository.save(client));
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -64,10 +62,9 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void delete(ClientDTO entity) throws Exception {
 
-        Client client = clientMapper.toClient(entity);
-
-        if(clientRepository.findById(client.getId_client()).isPresent()){
-            clientRepository.delete(client);
+        if(repository.findById(entity.getId_client()).isPresent()){
+            Client client = mapper.toClient(entity);
+            repository.delete(client);
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -75,10 +72,9 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteById(Integer id) throws Exception {
-        try{
-            Client client = clientRepository.findById(id).get();
-            clientRepository.deleteById(client.getId_client());
-        }catch (Exception e){
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+        }else{
             throw new Exception("La entidad no existe");
         }
     }
@@ -93,7 +89,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Long count() {
 
-        return clientRepository.count();
+        return repository.count();
 
     }
 

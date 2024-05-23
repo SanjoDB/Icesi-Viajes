@@ -15,23 +15,23 @@ import java.util.List;
 public class SaleServiceImpl implements SaleService{
 
     @Autowired
-    private SaleRepository saleRepository;
+    private SaleRepository repository;
     @Autowired
-    private SaleMapper saleMapper;
+    private SaleMapper mapper;
 
     @Override
     public List<SaleDTO> findAll() {
 
-        List<SaleDTO> lstCliente = saleMapper.toSaleDTO(saleRepository.findAll());
+        List<SaleDTO> lst = mapper.toSaleDTO(repository.findAll());
 
-        return lstCliente;
+        return lst;
     }
 
     @Override
     public SaleDTO findById(Integer id) throws Exception {
         try{
-            Sale sale = saleRepository.findById(id).get();
-            return saleMapper.toSaleDTO(sale);
+            Sale sale = repository.findById(id).get();
+            return mapper.toSaleDTO(sale);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
         }
@@ -40,10 +40,9 @@ public class SaleServiceImpl implements SaleService{
     @Override
     public SaleDTO save(SaleDTO entity) throws Exception {
 
-        Sale sale = saleMapper.toSale(entity);
-
-        if(saleRepository.findById(sale.getId_sale()).isEmpty()){
-            return saleMapper.toSaleDTO(saleRepository.save(sale));
+        if(repository.findById(entity.getId_sale()).isEmpty()){
+            Sale sale = mapper.toSale(entity);
+            return mapper.toSaleDTO(repository.save(sale));
         }else{
             throw new Exception("La entidad ya existe");
         }
@@ -52,10 +51,9 @@ public class SaleServiceImpl implements SaleService{
     @Override
     public SaleDTO update(SaleDTO entity) throws Exception {
 
-        Sale sale = saleMapper.toSale(entity);
-
-        if(saleRepository.findById(sale.getId_sale()).isPresent()){
-            return saleMapper.toSaleDTO(saleRepository.save(sale));
+        if(repository.findById(entity.getId_sale()).isPresent()){
+            Sale sale = mapper.toSale(entity);
+            return mapper.toSaleDTO(repository.save(sale));
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -64,10 +62,9 @@ public class SaleServiceImpl implements SaleService{
     @Override
     public void delete(SaleDTO entity) throws Exception {
 
-        Sale sale = saleMapper.toSale(entity);
-
-        if(saleRepository.findById(sale.getId_sale()).isPresent()){
-            saleRepository.delete(sale);
+        if(repository.findById(entity.getId_sale()).isPresent()){
+            Sale sale = mapper.toSale(entity);
+            repository.delete(sale);
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -75,10 +72,9 @@ public class SaleServiceImpl implements SaleService{
 
     @Override
     public void deleteById(Integer id) throws Exception {
-        try{
-            Sale sale = saleRepository.findById(id).get();
-            saleRepository.deleteById(sale.getId_sale());
-        }catch (Exception e){
+        if (repository.findById(id).isPresent()){
+            repository.deleteById(id);
+        }else{
             throw new Exception("La entidad no existe");
         }
     }
@@ -93,7 +89,7 @@ public class SaleServiceImpl implements SaleService{
     @Override
     public Long count() {
 
-        return saleRepository.count();
+        return repository.count();
 
     }
 
