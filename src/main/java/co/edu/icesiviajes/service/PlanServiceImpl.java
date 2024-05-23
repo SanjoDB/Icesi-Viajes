@@ -97,4 +97,9 @@ public class PlanServiceImpl implements PlanService{
 
     }
 
+    @Override
+    public List<Plan> findAllPlans() {
+        List<Plan> plans = planRepository.findAllPlans();
+        return plans;
+    }
 }
