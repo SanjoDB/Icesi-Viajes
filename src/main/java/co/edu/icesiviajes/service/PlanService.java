@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PlanService extends GenericService<PlanDTO, Integer>{
 
-    List<Plan> findAllPlans();
+    List<PlanDTO> findAllPlans();
 
     List<PlanDTO> listAll(String word);
 

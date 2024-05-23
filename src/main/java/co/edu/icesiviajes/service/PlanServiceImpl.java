@@ -93,21 +93,19 @@ public class PlanServiceImpl implements PlanService{
 
     }
 
-    public List<PlanDTO> listAll(String word){
-
-        List<PlanDTO> lst = mapper.toPlanDTO(repository.listAll(word));
-        List<PlanDTO> lst2 = mapper.toPlanDTO(repository.findAll());
-
-        if (word != null){
-            return lst;
+    @Override
+    public List<PlanDTO> listAll(String word) {
+        if (word != null && !word.trim().isEmpty()) {
+            return mapper.toPlanDTO(repository.listAll(word));
+        } else {
+            return mapper.toPlanDTO(repository.findAll());
         }
-
-        return lst2;
     }
 
+
     @Override
-    public List<Plan> findAllPlans() {
-        List<Plan> plans = repository.findAllPlans();
-        return plans;
+    public List<PlanDTO> findAllPlans() {
+        List<PlanDTO> lst = mapper.toPlanDTO(repository.findAllPlans());
+        return lst;
     }
 }
