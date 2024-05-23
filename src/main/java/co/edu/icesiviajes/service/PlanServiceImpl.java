@@ -105,4 +105,9 @@ public class PlanServiceImpl implements PlanService{
         return lst2;
     }
 
+    @Override
+    public List<Plan> findAllPlans() {
+        List<Plan> plans = repository.findAllPlans();
+        return plans;
+    }
 }

@@ -18,5 +18,6 @@ public class PlanDTO {
     private String state;
     private Integer client;
     private Integer user;
+    private String image;
 
 }

@@ -29,6 +29,8 @@ public class Plan {
     private Double price;
     @Column(name = "state", nullable = false)
     private String state;
+    @Column(name = "image", nullable = false)
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "id_client")
