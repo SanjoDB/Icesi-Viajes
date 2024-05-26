@@ -1,6 +1,7 @@
 package co.edu.icesiviajes.service;
 
 import co.edu.icesiviajes.domain.User;
+import co.edu.icesiviajes.dto.ClientDTO;
 import co.edu.icesiviajes.dto.LoginDTO;
 import co.edu.icesiviajes.dto.UserDTO;
 import co.edu.icesiviajes.mapper.UserMapper;
@@ -135,4 +136,14 @@ public class UserServiceImpl implements UserService{
             return new LoginResponse("Email not exist", false);
         }
     }
+
+    @Override
+    public List<UserDTO> listAll(String word) {
+        if (word != null && !word.trim().isEmpty()) {
+            return mapper.toUserDTO(repository.listAll(word));
+        } else {
+            return mapper.toUserDTO(repository.findAll());
+        }
+    }
+
 }

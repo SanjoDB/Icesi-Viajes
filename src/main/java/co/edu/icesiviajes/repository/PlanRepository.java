@@ -16,7 +16,4 @@ public interface PlanRepository extends JpaRepository<Plan, Integer> {
     @Query("SELECT p FROM Plan p WHERE p.name LIKE %?1% OR p.code LIKE %?1%")
     public List<Plan> listAll(String word);
 
-    @Query("SELECT p FROM Plan p")
-    List<Plan> findAllPlans();
-
 }

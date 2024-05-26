@@ -102,10 +102,4 @@ public class PlanServiceImpl implements PlanService{
         }
     }
 
-
-    @Override
-    public List<PlanDTO> findAllPlans() {
-        List<PlanDTO> lst = mapper.toPlanDTO(repository.findAllPlans());
-        return lst;
-    }
 }

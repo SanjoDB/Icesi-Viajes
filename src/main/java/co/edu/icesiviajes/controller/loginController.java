@@ -6,8 +6,11 @@ import co.edu.icesiviajes.dto.UserDTO;
 import co.edu.icesiviajes.response.LoginResponse;
 import co.edu.icesiviajes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -32,4 +35,11 @@ public class loginController {
 
         return ResponseEntity.ok(loginResponse);
     }
+
+    @GetMapping(path = "/getUser")
+    public ResponseEntity<List<UserDTO>> getAllUsersWithImageUrls(@RequestParam(required = false) String word) {
+        List<UserDTO> users = userService.listAll(word);
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
 }

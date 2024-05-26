@@ -27,6 +27,8 @@ public class Client {
     private String Gender;
     @Column(name = "birthdate", nullable = false)
     private Date birthdate;
+    @Column(name = "image", nullable = false)
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "id_idty")

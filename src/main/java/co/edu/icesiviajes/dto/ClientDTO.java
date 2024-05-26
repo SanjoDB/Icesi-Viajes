@@ -16,5 +16,6 @@ public class ClientDTO {
     private String Gender;
     private Date birthdate;
     private Integer identificationType;
+    private String image;
 
 }

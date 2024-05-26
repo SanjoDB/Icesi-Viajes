@@ -93,4 +93,13 @@ public class ClientServiceImpl implements ClientService {
 
     }
 
+    @Override
+    public List<ClientDTO> listAll(String word) {
+        if (word != null && !word.trim().isEmpty()) {
+            return mapper.toClientDTO(repository.listAll(word));
+        } else {
+            return mapper.toClientDTO(repository.findAll());
+        }
+    }
+
 }
