@@ -33,10 +33,6 @@ public class Plan {
     private String image;
 
     @ManyToOne
-    @JoinColumn(name = "id_client")
-    private Client client;
-
-    @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
 

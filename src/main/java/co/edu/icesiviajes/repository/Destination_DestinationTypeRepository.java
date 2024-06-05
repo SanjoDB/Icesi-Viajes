@@ -5,10 +5,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @EnableJpaRepositories
 public interface Destination_DestinationTypeRepository extends JpaRepository<Destination_DestinationType, Integer> {
 
+    List<Destination_DestinationType> findByDestinationID(Integer id);
 
+    List<Destination_DestinationType> findByDestinationTypeID(Integer id);
+
+    Destination_DestinationType findByDestinationIDAndDestinatioTypeID(Integer desId, Integer desTyId);
+
+    void deleteByDestinationID(Integer id);
+
+    void deleteByDestinationTypeID(Integer id);
 
 }

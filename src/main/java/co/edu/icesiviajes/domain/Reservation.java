@@ -13,6 +13,7 @@ public class Reservation {
     @Id
     @Column(name = "id_reservation", nullable = false)
     private Integer id_reservation;
+
     @Column(name = "reserved", nullable = false)
     private Date reserved;
 

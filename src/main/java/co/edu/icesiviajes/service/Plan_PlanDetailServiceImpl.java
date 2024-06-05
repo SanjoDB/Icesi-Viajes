@@ -22,7 +22,7 @@ public class Plan_PlanDetailServiceImpl implements Plan_PlanDetailService {
     @Override
     public List<Plan_PlanDetailDTO> findAll() {
 
-        List<Plan_PlanDetailDTO> lst = mapper.toDestination_DestinationTypeDTO(repository.findAll());
+        List<Plan_PlanDetailDTO> lst = mapper.toPlan_PlanDetailDTO(repository.findAll());
 
         return lst;
     }
@@ -31,7 +31,7 @@ public class Plan_PlanDetailServiceImpl implements Plan_PlanDetailService {
     public Plan_PlanDetailDTO findById(Integer id) throws Exception {
         try{
             Plan_PlanDetail plan_PlanDetail = repository.findById(id).get();
-            return mapper.toDestination_DestinationTypeDTO(plan_PlanDetail);
+            return mapper.toPlan_PlanDetailDTO(plan_PlanDetail);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
         }
@@ -41,8 +41,8 @@ public class Plan_PlanDetailServiceImpl implements Plan_PlanDetailService {
     public Plan_PlanDetailDTO save(Plan_PlanDetailDTO entity) throws Exception {
 
         if(repository.findById(entity.getId_pAd()).isEmpty()){
-            Plan_PlanDetail plan_PlanDetail = mapper.toDestination_DestinationType(entity);
-            return mapper.toDestination_DestinationTypeDTO(repository.save(plan_PlanDetail));
+            Plan_PlanDetail plan_PlanDetail = mapper.toPlan_PlanDetail(entity);
+            return mapper.toPlan_PlanDetailDTO(repository.save(plan_PlanDetail));
         }else{
             throw new Exception("La entidad ya existe");
         }
@@ -52,8 +52,8 @@ public class Plan_PlanDetailServiceImpl implements Plan_PlanDetailService {
     public Plan_PlanDetailDTO update(Plan_PlanDetailDTO entity) throws Exception {
 
         if(repository.findById(entity.getId_pAd()).isPresent()){
-            Plan_PlanDetail plan_PlanDetail = mapper.toDestination_DestinationType(entity);
-            return mapper.toDestination_DestinationTypeDTO(repository.save(plan_PlanDetail));
+            Plan_PlanDetail plan_PlanDetail = mapper.toPlan_PlanDetail(entity);
+            return mapper.toPlan_PlanDetailDTO(repository.save(plan_PlanDetail));
         }else{
             throw new Exception("La entidad no existe");
         }
@@ -63,7 +63,7 @@ public class Plan_PlanDetailServiceImpl implements Plan_PlanDetailService {
     public void delete(Plan_PlanDetailDTO entity) throws Exception {
 
         if(repository.findById(entity.getId_pAd()).isPresent()){
-            Plan_PlanDetail plan_PlanDetail = mapper.toDestination_DestinationType(entity);
+            Plan_PlanDetail plan_PlanDetail = mapper.toPlan_PlanDetail(entity);
             repository.delete(plan_PlanDetail);
         }else{
             throw new Exception("La entidad no existe");
@@ -90,6 +90,47 @@ public class Plan_PlanDetailServiceImpl implements Plan_PlanDetailService {
     public Long count() {
 
         return repository.count();
+
+    }
+
+    @Override
+    public List<Plan_PlanDetailDTO> findByPlanID(Integer id) {
+
+        List<Plan_PlanDetailDTO> lst = mapper.toPlan_PlanDetailDTO(repository.findByPlanID(id));
+
+        return lst;
+
+    }
+
+    @Override
+    public List<Plan_PlanDetailDTO> findByPlanDetailID(Integer id) {
+
+        List<Plan_PlanDetailDTO> lst = mapper.toPlan_PlanDetailDTO(repository.findByPlanDetailID(id));
+
+        return lst;
+
+    }
+
+    @Override
+    public Plan_PlanDetailDTO findByPlanIDAndPlanDetailID(Integer planId, Integer planDeId) {
+
+        Plan_PlanDetailDTO lst = mapper.toPlan_PlanDetailDTO(repository.findByPlanIDAndPlanDetailID(planId, planDeId));
+
+        return lst;
+
+    }
+
+    @Override
+    public void deleteByPlanID(Integer id) {
+
+        repository.deleteByPlanID(id);
+
+    }
+
+    @Override
+    public void deleteByPlanDetailID(Integer id) {
+
+        repository.deleteByPlanDetailID(id);
 
     }
 

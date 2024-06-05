@@ -13,6 +13,7 @@ public class Sale {
     @Id
     @Column(name = "id_sale", nullable = false)
     private Integer id_sale;
+
     @Column(name = "sold", nullable = false)
     private Date sold;
 

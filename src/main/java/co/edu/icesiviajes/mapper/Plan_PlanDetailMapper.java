@@ -12,18 +12,18 @@ public interface Plan_PlanDetailMapper {
 
     @Mapping(source = "plan.id_plan", target = "plan")
     @Mapping(source = "planDetail.id_planDetail", target = "planDetail")
-    Plan_PlanDetailDTO toDestination_DestinationTypeDTO(Plan_PlanDetail entity);
+    Plan_PlanDetailDTO toPlan_PlanDetailDTO(Plan_PlanDetail entity);
 
     @Mapping(source = "plan", target = "plan.id_plan")
     @Mapping(source = "planDetail", target = "planDetail.id_planDetail")
-    Plan_PlanDetail toDestination_DestinationType(Plan_PlanDetailDTO entity);
+    Plan_PlanDetail toPlan_PlanDetail(Plan_PlanDetailDTO entity);
 
     @Mapping(source = "plan.id_plan", target = "plan")
     @Mapping(source = "planDetail.id_planDetail", target = "planDetail")
-    List<Plan_PlanDetailDTO> toDestination_DestinationTypeDTO(List<Plan_PlanDetail> entity);
+    List<Plan_PlanDetailDTO> toPlan_PlanDetailDTO(List<Plan_PlanDetail> entity);
 
     @Mapping(source = "plan", target = "plan.id_plan")
     @Mapping(source = "planDetail", target = "planDetail.id_planDetail")
-    List<Plan_PlanDetail> toDestination_DestinationType(List<Plan_PlanDetailDTO> entity);
+    List<Plan_PlanDetail> toPlan_PlanDetail(List<Plan_PlanDetailDTO> entity);
 
 }

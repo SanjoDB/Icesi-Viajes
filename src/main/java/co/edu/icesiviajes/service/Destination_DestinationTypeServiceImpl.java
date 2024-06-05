@@ -92,4 +92,45 @@ public class Destination_DestinationTypeServiceImpl implements Destination_Desti
 
     }
 
+    @Override
+    public List<Destination_DestinationTypeDTO> findByDestinationID(Integer id) {
+
+        List<Destination_DestinationTypeDTO> lst = mapper.toDestination_DestinationTypeDTO(repository.findByDestinationID(id));
+
+        return lst;
+
+    }
+
+    @Override
+    public List<Destination_DestinationTypeDTO> findByDestinationTypeID(Integer id) {
+
+        List<Destination_DestinationTypeDTO> lst = mapper.toDestination_DestinationTypeDTO(repository.findByDestinationTypeID(id));
+
+        return lst;
+
+    }
+
+    @Override
+    public Destination_DestinationTypeDTO findByDestinationIDAndDestinatioTypeID(Integer desId, Integer desTyId) {
+
+        Destination_DestinationTypeDTO lst = mapper.toDestination_DestinationTypeDTO(repository.findByDestinationIDAndDestinatioTypeID(desId, desTyId));
+
+        return lst;
+
+    }
+
+    @Override
+    public void deleteByDestinationID(Integer id) {
+
+        repository.deleteByDestinationID(id);
+
+    }
+
+    @Override
+    public void deleteByDestinationTypeID(Integer id) {
+
+        repository.deleteByDestinationTypeID(id);
+
+    }
+
 }
