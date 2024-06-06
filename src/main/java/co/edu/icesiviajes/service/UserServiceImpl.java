@@ -67,6 +67,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public UserDTO findByemail(String email) {
+            User user = repository.findByLogin(email);
+            return mapper.toUserDTO(user);
+    }
+
+    @Override
     public void delete(UserDTO entity) throws Exception {
 
         if(repository.findById(entity.getId_user()).isPresent()){

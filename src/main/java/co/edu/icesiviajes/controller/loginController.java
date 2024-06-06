@@ -1,6 +1,7 @@
 package co.edu.icesiviajes.controller;
 
 
+import co.edu.icesiviajes.domain.User;
 import co.edu.icesiviajes.dto.LoginDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import co.edu.icesiviajes.dto.UserDTO;
@@ -21,6 +22,7 @@ public class loginController {
     @Autowired
     private UserService userService;
 
+
     @PostMapping(path = "/save")
     public String saveUser(@RequestBody UserDTO userDTO){
 
@@ -28,7 +30,11 @@ public class loginController {
         return id;
     }
 
-
+    @GetMapping(path = "/getUsuario/{email}")
+    public ResponseEntity<UserDTO> getUser(@PathVariable String email){
+        UserDTO userDTO = userService.findByemail(email);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
     @PostMapping(path = "/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
 

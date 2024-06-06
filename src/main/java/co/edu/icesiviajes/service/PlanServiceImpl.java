@@ -33,6 +33,7 @@ public class PlanServiceImpl implements PlanService{
     public PlanDTO findById(Integer id) throws Exception {
         try{
             Plan plan = repository.findById(id).get();
+            System.out.println(plan.getName());
             return mapper.toPlanDTO(plan);
         }catch (Exception e){
             throw new Exception("La entidad no existe");
@@ -43,6 +44,7 @@ public class PlanServiceImpl implements PlanService{
     public PlanDTO save(PlanDTO entity) throws Exception {
 
         if(repository.findById(entity.getId_plan()).isEmpty()){
+
             Plan plan = mapper.toPlan(entity);
             return mapper.toPlanDTO(repository.save(plan));
         }else{

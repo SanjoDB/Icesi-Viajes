@@ -11,6 +11,8 @@ public interface UserService extends GenericService<UserDTO, Integer>{
     String addUser(UserDTO userDTO);
     LoginResponse loginUser(LoginDTO loginDTO);
     List<UserDTO> listAll(String word);
+
+    UserDTO findByemail(String id);
 }
 
 
