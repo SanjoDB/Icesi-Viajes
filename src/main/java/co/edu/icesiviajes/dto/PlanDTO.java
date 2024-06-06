@@ -1,5 +1,7 @@
 package co.edu.icesiviajes.dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,7 +21,7 @@ public class PlanDTO {
     private Integer user;
     private String image;
 
-    public PlanDTO(String code, String name, String description, Integer num_people, Date start_Date, Date end_Date, Double price, String state, String image) {
+    public PlanDTO(String code, String name, String description, Integer num_people, Date start_Date, Date end_Date, Double price, String state, Integer user, String image) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -28,6 +30,7 @@ public class PlanDTO {
         this.end_Date = end_Date;
         this.price = price;
         this.state = state;
+        this.user = user;
         this.image = image;
     }
 }

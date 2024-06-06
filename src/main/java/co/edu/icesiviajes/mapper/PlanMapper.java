@@ -10,19 +10,15 @@ import java.util.List;
 @Mapper
 public interface PlanMapper {
 
-    @Mapping(source = "client.id_client", target = "client")
     @Mapping(source = "user.id_user", target = "user")
     PlanDTO toPlanDTO(Plan entity);
 
-    @Mapping(source = "client", target = "client.id_client")
     @Mapping(source = "user", target = "user.id_user")
     Plan toPlan(PlanDTO entity);
 
-    @Mapping(source = "client.id_client", target = "client")
     @Mapping(source = "user.id_user", target = "user")
     List<PlanDTO> toPlanDTO(List<Plan> entity);
 
-    @Mapping(source = "client", target = "client.id_client")
     @Mapping(source = "user", target = "user.id_user")
     List<Plan> toPlan(List<PlanDTO> entity);
 

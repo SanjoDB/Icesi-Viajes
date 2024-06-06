@@ -7,10 +7,11 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "plan")
+@Table(name = "planes")
 public class Plan {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_plan", nullable = false)
     private Integer id_plan;
     @Column(name = "code", nullable = false)
@@ -36,7 +37,7 @@ public class Plan {
     @JoinColumn(name = "id_user")
     private User user;
 
-    public Plan(String code, String name, String description, Integer num_people, Date start_Date, Date end_Date, Double price, String state, String image) {
+    public Plan(String code, String name, String description, Integer num_people, Date start_Date, Date end_Date, Double price, User user, String state, String image) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -44,6 +45,7 @@ public class Plan {
         this.start_Date = start_Date;
         this.end_Date = end_Date;
         this.price = price;
+        this.user = user;
         this.state = state;
         this.image = image;
     }
