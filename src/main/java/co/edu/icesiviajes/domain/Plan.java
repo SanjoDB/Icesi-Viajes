@@ -10,7 +10,6 @@ import java.util.Date;
 @Table(name = "planes")
 public class Plan {
 
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_plan")
@@ -51,4 +50,7 @@ public class Plan {
         this.image = image;
     }
 
+    public Plan() {
+
+    }
 }

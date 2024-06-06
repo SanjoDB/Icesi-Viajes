@@ -23,7 +23,7 @@ public class Client {
     private String phone;
     @Column(name = "mail", nullable = false)
     private String mail;
-    @Column(name = "Gender", nullable = false)
+    @Column(name = "gender", nullable = false)
     private String Gender;
     @Column(name = "birthdate", nullable = false)
     private Date birthdate;

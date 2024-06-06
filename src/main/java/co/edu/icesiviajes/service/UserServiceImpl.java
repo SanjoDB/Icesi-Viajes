@@ -113,6 +113,7 @@ public class UserServiceImpl implements UserService{
                 this.passwordEncoder.encode(userDTO.getPassword()),
                 userDTO.getFirst_name(),
                 userDTO.getLast_name(),
+                userDTO.getRole(),
                 userDTO.getNum_id(),
                 "true"
         );
