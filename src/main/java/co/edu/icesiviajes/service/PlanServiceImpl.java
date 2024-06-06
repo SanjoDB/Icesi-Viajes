@@ -7,9 +7,11 @@ import co.edu.icesiviajes.repository.PlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
+@CrossOrigin("http://localhost:5173")
 @Scope("singleton")
 @Service
 public class PlanServiceImpl implements PlanService{

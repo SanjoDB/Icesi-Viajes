@@ -14,6 +14,10 @@ public class PlanDTO {
     private Integer num_people;
     private Date start_Date;
     private Date end_Date;
+    private Double price;
+    private String state;
+    private Integer user;
+    private String image;
 
     public PlanDTO(String code, String name, String description, Integer num_people, Date start_Date, Date end_Date, Double price, String state, String image) {
         this.code = code;
@@ -26,10 +30,4 @@ public class PlanDTO {
         this.state = state;
         this.image = image;
     }
-
-    private Double price;
-    private String state;
-    private String image;
-
-
 }
