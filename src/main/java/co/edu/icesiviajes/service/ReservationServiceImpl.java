@@ -2,6 +2,7 @@ package co.edu.icesiviajes.service;
 
 import co.edu.icesiviajes.domain.Client;
 import co.edu.icesiviajes.domain.Reservation;
+import co.edu.icesiviajes.dto.Plan_PlanDetailDTO;
 import co.edu.icesiviajes.dto.ReservationDTO;
 import co.edu.icesiviajes.mapper.ReservationMapper;
 import co.edu.icesiviajes.repository.ReservationRepository;
@@ -91,6 +92,47 @@ public class ReservationServiceImpl implements ReservationService{
     public Long count() {
 
         return repository.count();
+
+    }
+
+    @Override
+    public List<ReservationDTO> findByClientID(Integer id) {
+
+        List<ReservationDTO> lst = mapper.toReservationDTO(repository.findByClientID(id));
+
+        return lst;
+
+    }
+
+    @Override
+    public List<ReservationDTO> findByPlanID(Integer id) {
+
+        List<ReservationDTO> lst = mapper.toReservationDTO(repository.findByPlanID(id));
+
+        return lst;
+
+    }
+
+    @Override
+    public ReservationDTO findByClientIDAndPlanID(Integer clientId, Integer planId) {
+
+        ReservationDTO lst = mapper.toReservationDTO(repository.findByClientIDAndPlanID(clientId, planId));
+
+        return lst;
+
+    }
+
+    @Override
+    public void deleteByClientID(Integer id) {
+
+        repository.deleteByClientID(id);
+
+    }
+
+    @Override
+    public void deleteByPlanID(Integer id) {
+
+        repository.deleteByPlanID(id);
 
     }
 

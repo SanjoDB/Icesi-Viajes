@@ -1,6 +1,7 @@
 package co.edu.icesiviajes.service;
 
 import co.edu.icesiviajes.domain.Sale;
+import co.edu.icesiviajes.dto.ReservationDTO;
 import co.edu.icesiviajes.dto.SaleDTO;
 import co.edu.icesiviajes.mapper.SaleMapper;
 import co.edu.icesiviajes.repository.SaleRepository;
@@ -90,6 +91,47 @@ public class SaleServiceImpl implements SaleService{
     public Long count() {
 
         return repository.count();
+
+    }
+
+    @Override
+    public List<SaleDTO> findByClientID(Integer id) {
+
+        List<SaleDTO> lst = mapper.toSaleDTO(repository.findByClientID(id));
+
+        return lst;
+
+    }
+
+    @Override
+    public List<SaleDTO> findByPlanID(Integer id) {
+
+        List<SaleDTO> lst = mapper.toSaleDTO(repository.findByPlanID(id));
+
+        return lst;
+
+    }
+
+    @Override
+    public SaleDTO findByClientIDAndPlanID(Integer clientId, Integer planId) {
+
+        SaleDTO lst = mapper.toSaleDTO(repository.findByClientIDAndPlanID(clientId, planId));
+
+        return lst;
+
+    }
+
+    @Override
+    public void deleteByClientID(Integer id) {
+
+        repository.deleteByClientID(id);
+
+    }
+
+    @Override
+    public void deleteByPlanID(Integer id) {
+
+        repository.deleteByPlanID(id);
 
     }
 
