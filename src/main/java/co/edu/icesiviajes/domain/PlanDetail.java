@@ -7,11 +7,11 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "planDetail")
+@Table(name = "plandetail")
 public class PlanDetail {
 
     @Id
-    @Column(name = "id_planDetail", nullable = false)
+    @Column(name = "id_plandetail", nullable = false)
     private Integer id_planDetail;
     @Column(name = "nutrition", nullable = false)
     private String nutrition;
@@ -31,7 +31,7 @@ public class PlanDetail {
     private String state;
 
     @ManyToOne
-    @JoinColumn(name = "id_destination")
+    @JoinColumn(name = "destination_id")
     private Destination destination;
 
 }

@@ -94,43 +94,43 @@ public class Plan_PlanDetailServiceImpl implements Plan_PlanDetailService {
     }
 
     @Override
-    public List<Plan_PlanDetailDTO> findByPlanID(Integer id) {
+    public List<Plan_PlanDetailDTO> findByPlanId_plan(Integer id) {
 
-        List<Plan_PlanDetailDTO> lst = mapper.toPlan_PlanDetailDTO(repository.findByPlanID(id));
-
-        return lst;
-
-    }
-
-    @Override
-    public List<Plan_PlanDetailDTO> findByPlanDetailID(Integer id) {
-
-        List<Plan_PlanDetailDTO> lst = mapper.toPlan_PlanDetailDTO(repository.findByPlanDetailID(id));
+        List<Plan_PlanDetailDTO> lst = mapper.toPlan_PlanDetailDTO(repository.findByPlan_Id(id));
 
         return lst;
 
     }
 
     @Override
+    public List<Plan_PlanDetailDTO> findByPlanDetailId_planDetail(Integer id) {
+
+        List<Plan_PlanDetailDTO> lst = mapper.toPlan_PlanDetailDTO(repository.findByPlanDetail_Id(id));
+
+        return lst;
+
+    }
+
+
     public Plan_PlanDetailDTO findByPlanIDAndPlanDetailID(Integer planId, Integer planDeId) {
 
-        Plan_PlanDetailDTO lst = mapper.toPlan_PlanDetailDTO(repository.findByPlanIDAndPlanDetailID(planId, planDeId));
+        Plan_PlanDetailDTO lst = mapper.toPlan_PlanDetailDTO(repository.findByPlan_IdAndPlanDetail_Id(planId, planDeId));
 
         return lst;
 
     }
 
     @Override
-    public void deleteByPlanID(Integer id) {
+    public void deleteByPlanId_plan(Integer id) {
 
-        repository.deleteByPlanID(id);
+        repository.deleteByPlan_Id(id);
 
     }
 
     @Override
-    public void deleteByPlanDetailID(Integer id) {
+    public void deleteByPlanDetailId_planDetail(Integer id) {
 
-        repository.deleteByPlanDetailID(id);
+        repository.deleteByPlanDetail_Id(id);
 
     }
 

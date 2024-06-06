@@ -2,6 +2,7 @@ package co.edu.icesiviajes.controller;
 
 
 import co.edu.icesiviajes.dto.LoginDTO;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import co.edu.icesiviajes.dto.UserDTO;
 import co.edu.icesiviajes.response.LoginResponse;
 import co.edu.icesiviajes.service.UserService;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("api/v1/user")
 public class loginController {
 
@@ -27,6 +27,7 @@ public class loginController {
         String id = userService.addUser(userDTO);
         return id;
     }
+
 
     @PostMapping(path = "/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){

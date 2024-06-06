@@ -1,7 +1,6 @@
 package co.edu.icesiviajes.controller;
 
 import co.edu.icesiviajes.dto.Plan_PlanDetailDTO;
-import co.edu.icesiviajes.dto.ReservationDTO;
 import co.edu.icesiviajes.service.Plan_PlanDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,13 +18,13 @@ public class PlanAndPlanDetailRestController {
 
     @GetMapping(path = "/getpAdPlan")
     public ResponseEntity<List<Plan_PlanDetailDTO>> getAllpAdsByPlanId(@RequestBody Integer planId) {
-        List<Plan_PlanDetailDTO> pAds = service.findByPlanID(planId);
+        List<Plan_PlanDetailDTO> pAds = service.findByPlanId_plan(planId);
         return new ResponseEntity<>(pAds, HttpStatus.OK);
     }
 
     @GetMapping(path = "/getpAdPlanDetail")
     public ResponseEntity<List<Plan_PlanDetailDTO>> getAllpAdsByPlanDetailId(@RequestBody Integer planDetailId) {
-        List<Plan_PlanDetailDTO> pAds = service.findByPlanDetailID(planDetailId);
+        List<Plan_PlanDetailDTO> pAds = service.findByPlanDetailId_planDetail(planDetailId);
         return new ResponseEntity<>(pAds, HttpStatus.OK);
     }
 
@@ -43,13 +42,13 @@ public class PlanAndPlanDetailRestController {
 
     @PostMapping(path = "/deletePlan")
     public ResponseEntity<String> deletepAdsByPlanId(@RequestBody Integer planId) throws Exception {
-        service.deleteByPlanID(planId);
+        service.deleteByPlanId_plan(planId);
         return new ResponseEntity<>("Plan y Plan Detalle Eliminado", HttpStatus.OK);
     }
 
     @PostMapping(path = "/deletePlanDetail")
     public ResponseEntity<String> deletepAdsByPlanDetailId(@RequestBody Integer planDetailId) throws Exception {
-        service.deleteByPlanDetailID(planDetailId);
+        service.deleteByPlanDetailId_planDetail(planDetailId);
         return new ResponseEntity<>("Plan y Plan Detalle Eliminado", HttpStatus.OK);
     }
 

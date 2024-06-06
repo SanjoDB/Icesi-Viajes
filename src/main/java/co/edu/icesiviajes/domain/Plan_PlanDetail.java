@@ -5,20 +5,20 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "plan_PlanDetail")
+@Table(name = "plananddetail")
 public class Plan_PlanDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pAd", nullable = false)
+    @Column(name = "id_pad", nullable = false)
     private Integer id_pAd;
 
     @ManyToOne
-    @JoinColumn(name = "id_plan")
+    @JoinColumn(name = "plan_id")
     private Plan plan;
 
     @ManyToOne
-    @JoinColumn(name = "id_planDetail")
+    @JoinColumn(name = "plan_detail_id")
     private PlanDetail planDetail;
 
 }
