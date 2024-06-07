@@ -1,6 +1,7 @@
 package co.edu.icesiviajes.service;
 
 import co.edu.icesiviajes.dto.SaleDTO;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -15,5 +16,9 @@ public interface SaleService extends GenericService<SaleDTO, Integer>{
     void deleteByClientID(Integer id);
 
     void deleteByPlanID(Integer id);
+
+    List<Object> findWeeklySales();
+
+    List<Object[]> findLatestSales();
 
 }

@@ -16,4 +16,8 @@ public interface ReservationService extends GenericService<ReservationDTO, Integ
 
     void deleteByPlanID(Integer id);
 
+    List<Object> findWeeklyReservations();
+
+    List<Object[]> findLatestReservations();
+
 }

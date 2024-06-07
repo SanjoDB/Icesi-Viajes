@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 @Scope("singleton")
@@ -133,6 +137,25 @@ public class SaleServiceImpl implements SaleService{
 
         repository.deleteByPlanID(id);
 
+    }
+
+    @Override
+    public List<Object> findWeeklySales() {
+        LocalDate now = LocalDate.now();
+        LocalDate startOfWeek = now.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
+        System.out.println(startOfWeek);
+        LocalDate endOfWeek = now.with(TemporalAdjusters.nextOrSame(java.time.DayOfWeek.SUNDAY));
+        System.out.println(endOfWeek);
+
+        LocalDateTime startOfWeekDateTime = startOfWeek.atStartOfDay();
+        LocalDateTime endOfWeekDateTime = endOfWeek.atTime(LocalTime.MAX);
+
+        return repository.findWeeklySales(startOfWeekDateTime, endOfWeekDateTime);
+    }
+
+    @Override
+    public List<Object[]> findLatestSales() {
+        return repository.findLatestSales();
     }
 
 }
