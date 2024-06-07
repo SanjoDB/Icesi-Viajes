@@ -13,7 +13,6 @@ public class PlanDetailDTO {
     private String nutrition;
     private String lodging;
     private String transportation;
-    private Date transfer;
     private Double price;
     private Integer num_nights;
     private Integer num_days;

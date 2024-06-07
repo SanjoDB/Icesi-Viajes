@@ -21,4 +21,13 @@ public class Plan_PlanDetail {
     @JoinColumn(name = "plan_detail_id")
     private PlanDetail planDetail;
 
+    public Plan_PlanDetail(Integer id_pAd, Plan plan, PlanDetail planDetail) {
+        this.id_pAd = id_pAd;
+        this.plan = plan;
+        this.planDetail = planDetail;
+    }
+
+    public Plan_PlanDetail(){
+
+    }
 }
