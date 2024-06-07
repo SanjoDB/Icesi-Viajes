@@ -54,9 +54,7 @@ public class PlanServiceImpl implements PlanService{
 
     @Override
     public PlanDTO update(PlanDTO entity) throws Exception {
-        System.out.println("entra al metodo");
         if(repository.findById(entity.getId_plan()).isPresent()){
-            System.out.println("entra al plan id");
             Plan plan = mapper.toPlan(entity);
             plan.setCode(entity.getCode());
             plan.setName(entity.getName());

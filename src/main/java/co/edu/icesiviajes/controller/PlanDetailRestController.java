@@ -25,6 +25,7 @@ public class PlanDetailRestController {
 
     @PostMapping(path = "/create")
     public ResponseEntity<PlanDetailDTO> createPlanDetail(@RequestBody PlanDetailDTO plandetail) throws Exception {
+        System.out.println("ESTE ES EL DETALLE PLAN: " + plandetail);
         service.save(plandetail);
         return new ResponseEntity<>(plandetail, HttpStatus.CREATED);
     }
