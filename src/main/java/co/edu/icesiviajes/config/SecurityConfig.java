@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRequest ->
                         authRequest
                                 .requestMatchers("/auth", "api/v1/user/login","api/v1/user/save","api/v1/plans/getPlan","api/v1/plans/create","api/v1/user/getUsuario/**","api/v1/clients/getClient","api/v1/user/getUser","api/v1/destinations/create",
-                                        "api/v1/destinations/getDestination").permitAll()
+                                        "api/v1/destinations/getDestination","api/v1/plans/update").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->

@@ -54,9 +54,21 @@ public class PlanServiceImpl implements PlanService{
 
     @Override
     public PlanDTO update(PlanDTO entity) throws Exception {
-
+        System.out.println("entra al metodo");
         if(repository.findById(entity.getId_plan()).isPresent()){
+            System.out.println("entra al plan id");
             Plan plan = mapper.toPlan(entity);
+            plan.setCode(entity.getCode());
+            plan.setName(entity.getName());
+            plan.setDescription(entity.getDescription());
+            plan.setPrice(entity.getPrice());
+            plan.setNum_people(entity.getNum_people());
+            plan.setStart_Date(entity.getStart_Date());
+            plan.setEnd_Date(entity.getEnd_Date());
+            plan.setImage(entity.getImage());
+            plan.setState(entity.getState());
+
+
             return mapper.toPlanDTO(repository.save(plan));
         }else{
             throw new Exception("La entidad no existe");
