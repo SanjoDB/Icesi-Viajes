@@ -1,18 +1,18 @@
 package co.edu.icesiviajes.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.Random;
 
 @Entity
 @Data
 @Table(name = "destination")
 public class Destination {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id_destination", nullable = false)
+    @Column(name = "id_destination")
     private Integer id_destination;
     @Column(name = "code", nullable = false)
     private String code;
@@ -22,5 +22,11 @@ public class Destination {
     private String description;
     @Column(name = "state", nullable = false)
     private String state;
+    @Column(name = "image")
+    private String image;
+
+
+
+
 
 }

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @EnableWebSecurity
 @AllArgsConstructor
-@CrossOrigin
 @Configuration
 public class SecurityConfig {
 
@@ -42,7 +41,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/auth", "api/v1/user/login","api/v1/user/save","api/v1/plans/getPlan","api/v1/plans/create","api/v1/user/getUsuario/**","api/v1/clients/getClient","api/v1/user/getUser").permitAll()
+                                .requestMatchers("/auth", "api/v1/user/login","api/v1/user/save","api/v1/plans/getPlan","api/v1/plans/create","api/v1/user/getUsuario/**","api/v1/clients/getClient","api/v1/user/getUser","api/v1/destinations/create",
+                                        "api/v1/destinations/getDestination").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->

@@ -10,5 +10,7 @@ public class DestinationDTO {
     private String name;
     private String description;
     private String state;
+    private String image;
+
 
 }
