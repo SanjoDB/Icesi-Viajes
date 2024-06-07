@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 @Scope("singleton")
@@ -134,6 +138,25 @@ public class ReservationServiceImpl implements ReservationService{
 
         repository.deleteByPlanID(id);
 
+    }
+
+    @Override
+    public List<Object> findWeeklyReservations() {
+        LocalDate now = LocalDate.now();
+        LocalDate startOfWeek = now.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
+        System.out.println(startOfWeek);
+        LocalDate endOfWeek = now.with(TemporalAdjusters.nextOrSame(java.time.DayOfWeek.SUNDAY));
+        System.out.println(endOfWeek);
+
+        LocalDateTime startOfWeekDateTime = startOfWeek.atStartOfDay();
+        LocalDateTime endOfWeekDateTime = endOfWeek.atTime(LocalTime.MAX);
+
+        return repository.findWeeklyReservations(startOfWeekDateTime, endOfWeekDateTime);
+    }
+
+    @Override
+    public List<Object[]> findLatestReservations() {
+        return repository.findLatestReservations();
     }
 
 }

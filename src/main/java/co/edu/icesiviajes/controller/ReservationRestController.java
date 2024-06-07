@@ -67,4 +67,24 @@ public class ReservationRestController {
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/getReservationsOfTheWeek")
+    public ResponseEntity<?> reservationsOfTheWeek() {
+        try {
+            List<Object> response = service.findWeeklyReservations();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("No se pudo obtener las reservaciones de la semana", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/getLatestReservations")
+    public ResponseEntity<?> latestReservations() {
+        try {
+            List<Object[]> response = service.findLatestReservations();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("No se pudo obtener las últimas reservaciones", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

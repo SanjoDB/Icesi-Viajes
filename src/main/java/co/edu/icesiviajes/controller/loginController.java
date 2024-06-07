@@ -2,6 +2,7 @@ package co.edu.icesiviajes.controller;
 
 
 import co.edu.icesiviajes.domain.User;
+import co.edu.icesiviajes.dto.DestinationDTO;
 import co.edu.icesiviajes.dto.LoginDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import co.edu.icesiviajes.dto.UserDTO;
@@ -42,6 +43,12 @@ public class loginController {
         LoginResponse loginResponse = userService.loginUser(loginDTO);
 
         return ResponseEntity.ok(loginResponse);
+    }
+
+    @PostMapping(path = "/update")
+    public ResponseEntity<UserDTO> updateDestination(@RequestBody UserDTO userDTO) throws Exception {
+        userService.update(userDTO);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
     @GetMapping(path = "/getUser")

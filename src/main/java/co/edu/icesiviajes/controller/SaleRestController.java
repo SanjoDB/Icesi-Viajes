@@ -66,4 +66,24 @@ public class SaleRestController {
         return new ResponseEntity<>(sale, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/getSalesOfTheWeek")
+    public ResponseEntity<?> salesOfTheWeek() {
+        try {
+            List<Object> response = service.findWeeklySales();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("No se pudo obtener las ventas de la semana", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/getLatestSales")
+    public ResponseEntity<?> latestSales() {
+        try {
+            List<Object[]> response = service.findLatestSales();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("No se pudo obtener las últimas ventas", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

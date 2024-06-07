@@ -41,4 +41,10 @@ public class ClientRestController {
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/countClients")
+    public ResponseEntity<Long> numberClients(){
+        Long clients = service.count();
+        return new ResponseEntity<>(clients, HttpStatus.OK);
+    }
+
 }

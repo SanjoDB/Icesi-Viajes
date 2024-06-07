@@ -41,4 +41,10 @@ public class DestinationRestController {
         return new ResponseEntity<>(destination, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/countDestinations")
+    public ResponseEntity<Long> numberDestinations(){
+        Long destinations = service.count();
+        return new ResponseEntity<>(destinations, HttpStatus.OK);
+    }
+
 }

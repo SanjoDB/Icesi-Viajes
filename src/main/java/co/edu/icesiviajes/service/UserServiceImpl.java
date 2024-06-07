@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO update(UserDTO entity) throws Exception {
-
         if(repository.findById(entity.getId_user()).isPresent()){
             User user = mapper.toUser(entity);
             return mapper.toUserDTO(repository.save(user));

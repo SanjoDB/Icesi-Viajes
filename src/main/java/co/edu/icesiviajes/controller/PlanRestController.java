@@ -41,4 +41,10 @@ public class PlanRestController {
         return new ResponseEntity<>(plan, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/countPlans")
+    public ResponseEntity<Long> numberPlans(){
+        Long plans = service.count();
+        return new ResponseEntity<>(plans, HttpStatus.OK);
+    }
+
 }

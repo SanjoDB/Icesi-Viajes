@@ -25,8 +25,4 @@ public class Destination {
     @Column(name = "image")
     private String image;
 
-
-
-
-
 }

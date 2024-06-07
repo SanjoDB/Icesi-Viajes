@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -31,5 +32,11 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
     @Modifying
     @Query("DELETE FROM Sale s WHERE s.plan.id_plan = :id")
     void deleteByPlanID(@Param("id") Integer id);
+
+    @Query("SELECT s.sold, s.plan.price FROM Sale s WHERE s.sold >= :startOfWeek AND s.sold <= :endOfWeek GROUP BY s.sold, s.plan.price")
+    List<Object> findWeeklySales(@Param("startOfWeek") LocalDateTime startOfWeek, @Param("endOfWeek") LocalDateTime endOfWeek);
+
+    @Query("SELECT s.client.first_name, s.plan.name, s.sold FROM Sale s ORDER BY s.sold DESC LIMIT 5")
+    List<Object[]> findLatestSales();
 
 }
