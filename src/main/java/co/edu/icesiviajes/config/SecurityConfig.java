@@ -43,7 +43,8 @@ public class SecurityConfig {
                         authRequest
                                 .requestMatchers("/auth", "api/v1/user/login","api/v1/user/save","api/v1/plans/getPlan","api/v1/plans/create","api/v1/user/getUsuario/**","api/v1/clients/getClient","api/v1/user/getUser","api/v1/destinations/create",
                                         "api/v1/destinations/getDestination","api/v1/plans/update","api/v1/destinations/update", "api/v1/clients/update","api/v1/user/update", "api/v1/plans/countPlans", "api/v1/destinations/countDestinations", "api/v1/clients/countClients",
-                                        "api/v1/sales/getSalesOfTheWeek", "api/v1/sales/getLatestSales", "api/v1/reservations/getReservationsOfTheWeek", "api/v1/reservations/getLatestReservations","api/v1/planAndplandetail/create","api/v1/plandetails/create").permitAll()
+                                        "api/v1/sales/getSalesOfTheWeek", "api/v1/sales/getLatestSales", "api/v1/reservations/getReservationsOfTheWeek", "api/v1/reservations/getLatestReservations","api/v1/plandetails/create","api/v1/planAndplandetail/create","api/v1/plans/delete/**","api/v1/destinations/delete/**","api/v1/user/delete/**",
+                                        "api/v1/clients/delete/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->

@@ -29,11 +29,14 @@ public class DestinationRestController {
         return new ResponseEntity<>(destination, HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/delete")
-    public ResponseEntity<String> deleteDestination(@RequestBody Integer id) throws Exception {
-        service.deleteById(id);
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<String> deleteDestination(@PathVariable Integer id) throws Exception {
+        DestinationDTO destinationDTO = service.findById(id);
+        destinationDTO.setState("Inactive");
+        service.update(destinationDTO);
         return new ResponseEntity<>("Destino Eliminado", HttpStatus.OK);
     }
+
 
     @PostMapping(path = "/update")
     public ResponseEntity<DestinationDTO> updateDestination(@RequestBody DestinationDTO destination) throws Exception {

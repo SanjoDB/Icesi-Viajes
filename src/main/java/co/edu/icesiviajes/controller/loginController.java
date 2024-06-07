@@ -4,6 +4,7 @@ package co.edu.icesiviajes.controller;
 import co.edu.icesiviajes.domain.User;
 import co.edu.icesiviajes.dto.DestinationDTO;
 import co.edu.icesiviajes.dto.LoginDTO;
+import co.edu.icesiviajes.dto.PlanDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import co.edu.icesiviajes.dto.UserDTO;
 import co.edu.icesiviajes.response.LoginResponse;
@@ -49,6 +50,14 @@ public class loginController {
     public ResponseEntity<UserDTO> updateDestination(@RequestBody UserDTO userDTO) throws Exception {
         userService.update(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<String> deleteDestination(@PathVariable Integer id) throws Exception {
+        UserDTO userDTO = userService.findById(id);
+        userDTO.setState("Inactive");
+        userService.update(userDTO);
+        return new ResponseEntity<>("Usuario Eliminado", HttpStatus.OK);
     }
 
     @GetMapping(path = "/getUser")

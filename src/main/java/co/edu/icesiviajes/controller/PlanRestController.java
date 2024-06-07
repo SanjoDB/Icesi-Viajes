@@ -1,5 +1,6 @@
 package co.edu.icesiviajes.controller;
 
+import co.edu.icesiviajes.dto.DestinationDTO;
 import co.edu.icesiviajes.dto.PlanDTO;
 import co.edu.icesiviajes.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,14 @@ public class PlanRestController {
         return new ResponseEntity<>(plan, HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/delete")
-    public ResponseEntity<String> deletePlan(@RequestBody Integer id) throws Exception {
-        service.deleteById(id);
-        return new ResponseEntity<>("Plan Eliminado", HttpStatus.OK);
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<String> deleteDestination(@PathVariable Integer id) throws Exception {
+        PlanDTO planDTO = service.findById(id);
+        planDTO.setState("Inactive");
+        service.update(planDTO);
+        return new ResponseEntity<>("Destino Eliminado", HttpStatus.OK);
     }
+
 
     @PostMapping(path = "/update")
     public ResponseEntity<PlanDTO> updatePlan(@RequestBody PlanDTO plan) throws Exception {

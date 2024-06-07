@@ -29,8 +29,8 @@ public class ClientRestController {
         return new ResponseEntity<>(client, HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/delete")
-    public ResponseEntity<String> deletePlan(@RequestBody Integer id) throws Exception {
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<String> deletePlan(@PathVariable Integer id) throws Exception {
         service.deleteById(id);
         return new ResponseEntity<>("Cliente Eliminado", HttpStatus.OK);
     }
